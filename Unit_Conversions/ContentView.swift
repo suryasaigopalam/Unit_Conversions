@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let conversions = ["Temperature":AnyView(Temperature()),"Length":AnyView(Length()),"Volume":AnyView(Volume())]
+    let conversion = ["Temperature","Length","Volume"]
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(conversion, id: \.self) { name in
+                NavigationLink(name) {conversions[name]!}
+          }
+            .navigationTitle("Unit Conversions").font(.headline)
         }
-        .padding()
     }
 }
-
 #Preview {
     ContentView()
 }
